@@ -9,7 +9,7 @@ For most distro's, you can just run ``python -m pip install customtkinter``.
 
 If you're on Archlinux, you might need to do
 ```bash
-pacman -S tk
+pacman -S python tk
 paru -S customtkinter
 ```
 ## Installing the package

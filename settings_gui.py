@@ -15,7 +15,7 @@ _CONFIG_OPTIONS = {
 CONFIG_PATH = Path(f"~/.config/{PKGNAME.lower().replace(' ', '-')}/settings_map.json")
 """Location of the config file."""
 
-DEFAULT_CONFIG_INFO = str(_CONFIG_OPTIONS["settings"])
+DEFAULT_CONFIG_INFO = json.dumps(_CONFIG_OPTIONS)
 """Default data in config file"""
 
 class Settings(ctk.CTkScrollableFrame):
