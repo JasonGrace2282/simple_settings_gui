@@ -4,6 +4,7 @@ A simple barebones gui to keep from having to remember the commands to launch an
 ## Dependencies
 * python-tk
 * python-customtkinter
+
 For most distro's, you can just run ``python -m pip install customtkinter``.
 
 If you're on Archlinux, you might need to do
