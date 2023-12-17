@@ -23,7 +23,8 @@ echo "alias settings='python ~/settings-gui/settings_gui.py ~/settings_map.json'
 ### Archlinux
 WIP, do not use!
 ```bash
-paru -S simple-settings-gui-git```
+paru -S simple-settings-gui-git
+```
 
 ## Configuration Options
 
