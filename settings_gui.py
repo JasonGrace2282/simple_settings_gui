@@ -8,14 +8,15 @@ PKGNAME = "Simple Settings GUI"
 _CONFIG_OPTIONS = {
     "settings": {},
     "appearance": "dark",
-    "font": None
+    "font": None,
+    "geometry": "400x400"
 }
 """Dictionary of available config options to their defaults"""
 
 CONFIG_PATH = Path(f"~/.config/{PKGNAME.lower().replace(' ', '-')}/settings_map.json")
 """Location of the config file."""
 
-DEFAULT_CONFIG_INFO = json.dumps(_CONFIG_OPTIONS)
+DEFAULT_CONFIG_INFO = json.dumps(_CONFIG_OPTIONS, indent=2)
 """Default data in config file"""
 
 class Settings(ctk.CTkScrollableFrame):
@@ -76,13 +77,14 @@ def parse_json(path: Path) -> dict:
     return data
 
 def main():
+    jsondata = parse_json(CONFIG_PATH)
     root = ctk.CTk()
     root.title(PKGNAME)
-    root.geometry("400x400")
+    root.geometry(jsondata.pop("geometry"))
     root.resizable(True, True)
     settings = Settings(
         root,
-        **parse_json(CONFIG_PATH)
+        **jsondata
     )
     canvas = settings.master
     canvas.bind("<Configure>", lambda _: handle_resize(settings, root))
