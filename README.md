@@ -9,21 +9,19 @@ For most distro's, you can just run ``python -m pip install customtkinter``.
 
 If you're on Archlinux, you might need to do
 ```bash
-pacman -S tk
+pacman -S python tk
 paru -S customtkinter
 ```
 ## Installing the package
-
-### Manually
+The recommended way to install this is by cloning the git repository
 ```bash
 git clone https://github.com/JasonGrace2282/settings-gui.git ~/settings-gui`
-echo "alias settings='python ~/settings-gui/settings_gui.py ~/settings_map.json'" >> ~/.bashrc`
 ```
-
-### Archlinux
-WIP, do not use!
+If you would like to remove the ``.git`` folder,
 ```bash
-paru -S simple-settings-gui-git```
+rm -rf ~/settings-gui/.git
+```
+You can then edit the configuration file at ``~/.config/simple-settings-gui/settings_map.json``
 
 ## Configuration Options
 
