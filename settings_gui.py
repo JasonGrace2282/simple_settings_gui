@@ -1,5 +1,6 @@
+import logging
 import customtkinter as ctk
-import os
+import os, sys
 import json
 from pathlib import Path
 
@@ -18,6 +19,9 @@ CONFIG_PATH = Path.home() / f".config/{PKGNAME.lower().replace(' ', '-')}/settin
 
 DEFAULT_CONFIG_INFO = json.dumps(_CONFIG_OPTIONS, indent=2)
 """Default data in config file"""
+
+LOGGER = logging.getLogger("simple-settings-gui")
+"""The logging method"""
 
 class Settings(ctk.CTkScrollableFrame):
     def __init__(self, master: ctk.CTk, settings: dict[str, str], appearance: str, font: str | None, **kwargs):
@@ -62,7 +66,6 @@ def parse_json(path: Path) -> dict:
             
     with path.open() as f:
         data = json.loads(f.read())
-        print(path, data)
     
     if not isinstance(data, dict):
         raise ValueError("Configuration data must be a dictionary! See the README for more detail.")
@@ -74,10 +77,20 @@ def parse_json(path: Path) -> dict:
     for name, default in _CONFIG_OPTIONS.items():
         if name not in data:
             data[name] = default
-    print(data)
+    LOGGER.debug(
+        f"Parsed arguments {data}"
+    )
     return data
 
 def main():
+    if "--verbose" in sys.argv or "-vv" in sys.argv:
+        VERBOSITY = logging.DEBUG
+    else:
+        VERBOSITY = logging.WARNING
+    logging.basicConfig(
+        format=f"%(levelname)s (%(name)s): %(message)s"
+    )
+    LOGGER.setLevel(VERBOSITY)
     jsondata = parse_json(CONFIG_PATH)
     root = ctk.CTk()
     root.title(PKGNAME)
