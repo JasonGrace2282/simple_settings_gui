@@ -13,7 +13,7 @@ _CONFIG_OPTIONS = {
 }
 """Dictionary of available config options to their defaults"""
 
-CONFIG_PATH = Path(f"~/.config/{PKGNAME.lower().replace(' ', '-')}/settings_map.json")
+CONFIG_PATH = Path.home() / f".config/{PKGNAME.lower().replace(' ', '-')}/settings_map.json"
 """Location of the config file."""
 
 DEFAULT_CONFIG_INFO = json.dumps(_CONFIG_OPTIONS, indent=2)
@@ -61,7 +61,8 @@ def parse_json(path: Path) -> dict:
             f.write(DEFAULT_CONFIG_INFO)
             
     with path.open() as f:
-        data = json.load(f)
+        data = json.loads(f.read())
+        print(path, data)
     
     if not isinstance(data, dict):
         raise ValueError("Configuration data must be a dictionary! See the README for more detail.")
